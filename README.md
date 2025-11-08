@@ -4,9 +4,9 @@ A modern, full-stack digital order management system built specifically for tail
 
 ## 🌟 Features
 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5e29cb4c-9c4c-4d88-b505-7e54e0e186b5" />
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/f117490e-59fd-41be-9674-e8466e871fb0" />
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/02b52f22-4c30-4798-bb1a-1bc7785fc362" />
+<img width="1920" height="1024" alt="Screenshot (443)" src="https://github.com/user-attachments/assets/79e8d635-2ec5-4913-b1fd-cf44d3f07125" />
+<img width="1920" height="1024" alt="Screenshot (444)" src="https://github.com/user-attachments/assets/417769fc-67fa-4e93-9eb1-2a3415a5dd16" />
+![Uploading Screenshot (445).png…]()
 
 
 - **👥 Customer Management**
@@ -34,15 +34,6 @@ A modern, full-stack digital order management system built specifically for tail
   - Mobile-friendly
   - Beautiful gradient themes
 
-## 🚀 Live Demo
-
-**[View Live App](https://your-app-name.onrender.com)** *(Replace with your actual Render URL)*
-
-### Demo Credentials
-```
-Email: demo@tailornotebook.com
-Password: demo123
-```
 
 ### Backend
 - **Node.js** - Runtime environment
@@ -177,9 +168,6 @@ git push -u origin main
      NODE_ENV=production
      ```
 
-5. **Deploy!** 🎉
-
-Your app will be live at: `https://your-app-name.onrender.com`
 
 ## 🔧 API Endpoints
 
@@ -237,7 +225,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Your Name**
 - GitHub: [@Joshithach18](https://github.com/Joshithach18)
-- Email: your.email@example.com
+- Email: joshithachennamsetty@gmail.com
 
 ## 🙏 Acknowledgments
 
