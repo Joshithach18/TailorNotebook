@@ -6,7 +6,8 @@ A modern, full-stack digital order management system built specifically for tail
 
 <img width="1920" height="1024" alt="Screenshot (443)" src="https://github.com/user-attachments/assets/79e8d635-2ec5-4913-b1fd-cf44d3f07125" />
 <img width="1920" height="1024" alt="Screenshot (444)" src="https://github.com/user-attachments/assets/417769fc-67fa-4e93-9eb1-2a3415a5dd16" />
-![Uploading Screenshot (445).png…]()
+<img width="1920" height="1014" alt="Screenshot (445)" src="https://github.com/user-attachments/assets/0974873e-6482-4588-8fb8-9e3708ca8558" />
+
 
 
 - **👥 Customer Management**
