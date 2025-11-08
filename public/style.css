@@ -1,0 +1,57 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+}
+.navbar-brand {
+  font-weight: bold;
+}
+.card {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  border: none;
+}
+.table th {
+  background-color: #f1f5f9;
+}
+.badge {
+  font-size: 0.8rem;
+  padding: 0.35em 0.65em;
+  border-radius: 0.45rem;
+}
+.received {
+  background-color: #cff4fc;
+  color: #055160;
+}
+.in-progress {
+  background-color: #fff3cd;
+  color: #664d03;
+}
+.ready {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+.delivered {
+  background-color: #c3c3c3;
+  color: #333;
+}
+.pending {
+  background-color: #f8d7da;
+  color: #842029;
+}
+.partial {
+  background-color: #fff3cd;
+  color: #664d03;
+}
+.paid {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+.modal-lg {
+  max-width: 800px;
+}
+.table-responsive, .overflow-x-auto {
+  border-radius: 0.5rem;
+}
+.hidden {
+  display: none;
+}

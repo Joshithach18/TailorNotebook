@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Tailor Notebook</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body class="bg-gray-50">
+  <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-2">
+            <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <span class="text-xl font-bold text-gray-900">Tailor Notebook</span>
+          </div>
+          <div class="hidden md:flex gap-1">
+            <button id="nav-customers" class="px-4 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-100 bg-indigo-50 text-indigo-600">Customers</button>
+            <button id="nav-orders" class="px-4 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-100">Orders</button>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <span id="user-name" class="text-sm font-medium text-gray-700"></span>
+          <button id="btn-logout" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+    <div id="customers-section" class="mt-6">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <h2 class="text-2xl font-bold text-gray-900">Customers</h2>
+        <button class="px-6 py-2.5 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 shadow-sm" data-bs-toggle="modal" data-bs-target="#customerModal">+ Add Customer</button>
+      </div>
+      <div class="mb-4 flex gap-2">
+        <input id="customer-search" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="Search customers..."/>
+        <button id="search-btn" class="px-6 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200">Search</button>
+      </div>
+      <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="table table-hover mb-0">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">Name</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">Phone</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">Email</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="customers-list" class="divide-y divide-gray-200"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div id="orders-section" style="display:none;" class="mt-6">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <h2 class="text-2xl font-bold text-gray-900">Orders</h2>
+        <button class="px-6 py-2.5 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 shadow-sm" data-bs-toggle="modal" data-bs-target="#orderModal">+ Create Order</button>
+      </div>
+      <div class="mb-4">
+        <select id="status-filter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+          <option value="">All Statuses</option>
+          <option value="received">Received</option>
+          <option value="in-progress">In Progress</option>
+          <option value="ready">Ready</option>
+          <option value="delivered">Delivered</option>
+        </select>
+      </div>
+      <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="table table-hover mb-0">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">Order ID</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">Customer</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">Total</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">Status</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">Due Date</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="orders-list" class="divide-y divide-gray-200"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="customerModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content rounded-xl">
+        <div class="modal-header border-b">
+          <h5 class="modal-title font-bold" id="customerModalLabel">Add Customer</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="customer-form">
+            <input type="hidden" id="customer-id">
+            <div class="row mb-3">
+              <div class="col-md-4">
+                <label class="form-label font-semibold">Name</label>
+                <input type="text" class="form-control" id="customer-name" required>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label font-semibold">Phone</label>
+                <input type="text" class="form-control" id="customer-phone" required>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label font-semibold">Email</label>
+                <input type="email" class="form-control" id="customer-email">
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label font-semibold">Address</label>
+              <textarea class="form-control" id="customer-address" rows="2"></textarea>
+            </div>
+            <h5 class="mt-4 mb-3 font-bold">Measurements</h5>
+            <div class="row">
+              <div class="col-md-3 mb-3">
+                <label class="form-label">Bust</label>
+                <input type="number" class="form-control" id="measurement-bust" step="0.1">
+              </div>
+              <div class="col-md-3 mb-3">
+                <label class="form-label">Waist</label>
+                <input type="number" class="form-control" id="measurement-waist" step="0.1">
+              </div>
+              <div class="col-md-3 mb-3">
+                <label class="form-label">Hip</label>
+                <input type="number" class="form-control" id="measurement-hip" step="0.1">
+              </div>
+              <div class="col-md-3 mb-3">
+                <label class="form-label">Shoulder</label>
+                <input type="number" class="form-control" id="measurement-shoulder" step="0.1">
+              </div>
+              <div class="col-md-3 mb-3">
+                <label class="form-label">Sleeve</label>
+                <input type="number" class="form-control" id="measurement-sleeve" step="0.1">
+              </div>
+              <div class="col-md-3 mb-3">
+                <label class="form-label">Inseam</label>
+                <input type="number" class="form-control" id="measurement-inseam" step="0.1">
+              </div>
+              <div class="col-md-3 mb-3">
+                <label class="form-label">Neck</label>
+                <input type="number" class="form-control" id="measurement-neck" step="0.1">
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label font-semibold">Measurement Notes</label>
+              <textarea class="form-control" id="measurement-notes" rows="2"></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label font-semibold">Customer Notes</label>
+              <textarea class="form-control" id="customer-notes" rows="2"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer border-t">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button id="save-customer" type="button" class="btn btn-primary">Save Customer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="orderModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content rounded-xl">
+        <div class="modal-header border-b">
+          <h5 class="modal-title font-bold" id="orderModalLabel">Create Order</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="order-form">
+            <input type="hidden" id="order-id">
+            <div class="mb-3">
+              <label class="form-label font-semibold">Customer</label>
+              <select class="form-select" id="order-customer" required>
+                <option value="">Select Customer</option>
+              </select>
+            </div>
+            <h5 class="mt-4 mb-3 font-bold">Order Items</h5>
+            <div id="order-items">
+              <div class="order-item row mb-3">
+                <div class="col-md-5">
+                  <input type="text" class="form-control item-description" placeholder="Description" required>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" class="form-control item-fabric" placeholder="Fabric">
+                </div>
+                <div class="col-md-2">
+                  <input type="number" class="form-control item-price" placeholder="Price" step="0.01" required>
+                </div>
+                <div class="col-md-2">
+                  <input type="number" class="form-control item-quantity" placeholder="Qty" value="1" min="1">
+                </div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-secondary mb-3" id="add-item">+ Add Item</button>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label font-semibold">Total Amount</label>
+                <input type="number" class="form-control" id="order-total" step="0.01" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label font-semibold">Due Date</label>
+                <input type="date" class="form-control" id="order-due-date" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label font-semibold">Status</label>
+                <select class="form-select" id="order-status">
+                  <option value="received">Received</option>
+                  <option value="in-progress">In Progress</option>
+                  <option value="ready">Ready</option>
+                  <option value="delivered">Delivered</option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label font-semibold">Payment Status</label>
+                <select class="form-select" id="payment-status">
+                  <option value="pending">Pending</option>
+                  <option value="partial">Partial</option>
+                  <option value="paid">Paid</option>
+                </select>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label font-semibold">Fitting Date</label>
+              <input type="datetime-local" class="form-control" id="fitting-date">
+            </div>
+            <div class="mb-3">
+              <label class="form-label font-semibold">Notes</label>
+              <textarea class="form-control" id="order-notes" rows="2"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer border-t">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button id="save-order" type="button" class="btn btn-primary">Save Order</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script src="auth.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
